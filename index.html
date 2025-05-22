@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Schellenberger Portfolio Home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="fallback_message" style="width: 100%; height: 600px; position: absolute; top: 0px; left: 0px; z-index: 99999; display: none; align-items: center; justify-content: center; background-color: #fff;">
+        <div style="font-size: 36px; font-weight: 700; color: #000; text-align: center;">An error occured when loading content. Please try again later.</div>
+    </div>
+
+    <div id="home_page" style="display: none;">
+        <div id="header">
+            <div class="header_title">Joshua Schellenberger</div>
+        </div>
+        <div id="content">
+            <div class="center_box">
+                <svg xmlns="http://www.w3.org/2000/svg" height="120px" viewBox="0 -960 960 960" width="120px" fill="#9962CE"><path d="M153.08-160q-27.62 0-46.12-18.5-18.5-18.5-18.5-46.12v-70.76q0-27.62 18.5-46.12 18.5-18.5 46.12-18.5h214.61q27.62 0 46.12 18.5 18.5 18.5 18.5 46.12v70.76q0 27.62-18.5 46.12-18.5 18.5-46.12 18.5H153.08Zm440 0q-27.62 0-46.12-18.5-18.5-18.5-18.5-46.12v-510.76q0-27.62 18.5-46.12 18.5-18.5 46.12-18.5h214.61q27.62 0 46.12 18.5 18.5 18.5 18.5 46.12v510.76q0 27.62-18.5 46.12-18.5 18.5-46.12 18.5H593.08Zm-440-40h214.61q10.77 0 17.69-6.92 6.93-6.93 6.93-17.7v-70.76q0-10.77-6.93-17.7-6.92-6.92-17.69-6.92H153.08q-10.77 0-17.7 6.92-6.92 6.93-6.92 17.7v70.76q0 10.77 6.92 17.7 6.93 6.92 17.7 6.92Zm440 0h214.61q10.77 0 17.69-6.92 6.93-6.93 6.93-17.7v-510.76q0-10.77-6.93-17.7-6.92-6.92-17.69-6.92H593.08q-10.77 0-17.7 6.92-6.92 6.93-6.92 17.7v510.76q0 10.77 6.92 17.7 6.93 6.92 17.7 6.92ZM700-263.08q12.38 0 20.81-8.42 8.42-8.42 8.42-20.81 0-11.61-8.42-20.42-8.43-8.81-20.81-8.81-11.62 0-20.42 8.81-8.81 8.81-8.81 20.42 0 12.39 8.81 20.81 8.8 8.42 20.42 8.42Zm-546.92-192.3q-27.62 0-46.12-18.5-18.5-18.5-18.5-46.12v-215.38q0-27.62 18.5-46.12 18.5-18.5 46.12-18.5h215.38q27.62 0 46.12 18.5 18.5 18.5 18.5 46.12V-520q0 27.62-18.5 46.12-18.5 18.5-46.12 18.5H153.08Zm155.38-190.77q12.39 0 20.81-8.81 8.42-8.81 8.42-20.42 0-12.39-8.42-20.81-8.42-8.43-20.81-8.43-12.38 0-20.81 8.43-8.42 8.42-8.42 20.81 0 11.61 8.42 20.42 8.43 8.81 20.81 8.81Zm-180 140.84 86.16-116.23L310-495.38h58.46q10.77 0 17.69-6.93 6.93-6.92 6.93-17.69v-215.38q0-10.77-6.93-17.7-6.92-6.92-17.69-6.92H153.08q-10.77 0-17.7 6.92-6.92 6.93-6.92 17.7v230.07ZM260.77-260Zm440-220Zm-440-147.69Z"/></svg>
+                <div class="center_box_title">Welcome to my<br /><span style="font-size: 72px; font-weight: 800;">portfolio</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scripts = [{
+            name: "VueJs",
+            main: "https://unpkg.com/vue@3/dist/vue.global.js",
+            fallback: "https://cdn.jsdelivr.net/npm/vue@3.4.22/dist/vue.global.min.js"
+        }];
+
+        let scriptcounter = 0;
+
+        function loadScripts() {
+            if (scriptcounter < scripts.length) {
+                loadScript(scriptcounter);
+            }
+        }
+
+        function loadScript(index, fallback) {
+            let thescriptName = scripts[index].name;
+            let thescript = fallback ? scripts[index].fallback : scripts[index].main;
+            let myScript = document.createElement("script");
+            myScript.setAttribute("src", thescript);
+            document.body.appendChild(myScript);
+
+            myScript.addEventListener("load", scriptLoaded, false);
+            myScript.addEventListener("error", scriptError, false);
+
+
+            function scriptError() {
+                console.log("Script error for ", thescript);
+                if (fallback) { 
+                    console.log("Fallback failed, stopping");
+                    if(thescriptName == "VueJs"){
+                        document.getElementById("fallback_message").style.display = "flex";
+                    }
+                } else { 
+                    loadScript(index, true); 
+                }
+            }
+
+            function scriptLoaded() {
+                console.log("Script loaded - ", thescript);
+                scriptcounter++;
+                loadScripts();
+                if(thescriptName=="VueJs"){
+                    initiateApplication();
+                }
+            }
+        }
+
+        window.onload = function() {
+            loadScripts()
+        }
+
+        function initiateApplication(){
+            document.getElementById("home_page").style = "display: flex !important";
+            const app = Vue.createApp({
+                setup() {
+                    return {
+                        map: null,
+                    };
+                },
+                data() {
+                    return {
+                        // Content goes here
+                    }
+                },
+                async mounted() {
+                    // Content goes here
+                },
+                methods: {
+                    example(){
+                        // Content goes here
+                    },
+                }
+            });
+            app.mount('#home_page')
+        }
+    </script>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+
+        #home_page{
+            overflow: hidden;
+
+            margin: -8px;
+
+            width: calc(100% + 16px);
+            height: 100vh;
+            min-height: 100px;
+
+            position: relative;
+            flex-direction: column;
+            align-items: flex-start;
+
+            background-color: #ffffff;
+
+            font-family: 'Lato', sans-serif;
+
+            background-image: linear-gradient(to bottom right, #f2f2f2, #9962CE);
+        }
+
+        #header{
+            align-self: stretch;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            
+            padding: 24px 12px 0px 12px;
+        }
+
+        #header .header_title{
+            text-align: center;
+
+            color: #000;
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            line-height: 1;
+        }
+
+        #content{
+            align-self: stretch;
+            flex: 1 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .center_box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            padding: 24px 30px 30px 30px;
+            border-radius: 12px;
+            background-color: #fff;
+
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+            -webkit-animation: popup 0.5s;
+            animation: popup 0.5s;
+            -webkit-transform: scale(0,0); 
+            transform: scale(0,0);
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+
+        @-webkit-keyframes popup {
+            100% {
+                -webkit-transform: scale(1,1); 
+            }
+        }
+
+        @keyframes popup {
+            100% {
+                transform: scale(1,1); 
+            }
+        }
+
+        .center_box_title{
+            text-align: center;
+            
+            color: #222222;
+            font-size: 48px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+    </style>
+</body>
+</html>
